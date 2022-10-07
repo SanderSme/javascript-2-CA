@@ -34,7 +34,7 @@ function createHeader() {
         >Profile</a
       >
     </div>`;
-      userContent = `<p class="fas fa-user fa-2x text-gray-300 p-6"></p>
+      userContent = `<p class="fas fa-user fa-2x text-gray-100 p-6"></p>
       <div>
         <p id="logedInUser" class="text-white">${userName}</p>
         <a
