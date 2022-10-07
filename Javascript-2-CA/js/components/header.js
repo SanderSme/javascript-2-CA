@@ -8,7 +8,9 @@ function createHeader() {
     let headerContent;
     let userContent;
     headerContent = `<div class="py-6 pr-6 text-gray-100 text-xl ">
-    <a href="#" class="${pathname === "#" ? "hover:underline" : ""}"
+    <a href="./sign-up.html" class="${
+      pathname === "./sign-up.html" ? "hover:underline" : ""
+    }"
       >Sign Up</a
     >
   </div>`;
