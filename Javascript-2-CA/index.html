@@ -4,24 +4,162 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script type="module" src="/main.js" defer></script>
     <title>JS2-CA</title>
   </head>
-  <body class="bg-grey-100">
+  <body class="bg-gray-200 min-h-screen">
     <header class="bg-sky-900">
-      <div class="flex mx-auto max-w-screen-xl">
-        <div class="p-6">
-          <a href="#" class="text-gray-100 text-xl">Home</a>
+      <div class="max-w-screen-xl mx-auto flex justify-between">
+        <div class="flex">
+          <div class="py-6 pr-6">
+            <a href="./index.html" class="text-gray-100 text-xl hover:underline"
+              >Home</a
+            >
+          </div>
+          <div class="py-6 pl-6 ml-20">
+            <a href="#" class="text-gray-100 text-xl hover:underline"
+              >Profile</a
+            >
+          </div>
         </div>
-        <div class="p-6 ml-20">
-          <a href="#" class="text-gray-100 text-xl">Profile</a>
+        <div class="flex items-center">
+          <p class="fas fa-user fa-2x text-gray-300 p-6"></p>
+          <div>
+            <p id="logedInUser" class="text-white">Sander Smedbøl</p>
+            <a href="./sign-in.html" class="py-6 text-white hover:underline"
+              >Log Out</a
+            >
+          </div>
         </div>
       </div>
     </header>
     <main class="mx-auto max-w-screen-xl">
-      <h1 class="text-2xl mt-12">Home</h1>
-      <h2 class="text-xl mt-12 ml-10">Create post:</h2>
-      
+      <h1 class="text-2xl my-12">Home</h1>
+      <form
+        id="create-post-form"
+        class="flex flex-col gap-y-2 p-4 mx-auto w-1/2 text-left bg-gray-100 rounded-md border shadow"
+      >
+        <div class="flex flex-col mb-2">
+          <label for="postTitle" class="text-gray-500 text-lg mb-6"
+            >Create post:
+          </label>
+          <input
+            id="postTitle"
+            class="p-2 rounded-md border shadow"
+            name="postTitle"
+            type="text"
+            placeholder="Enter post title"
+          />
+          <span id="postTitleError" class="hidden text-sm text-red-500">
+            Post Title is required
+          </span>
+        </div>
+        <div class="flex flex-col gap-y-1 mb-2">
+          <label for="postBody" class="text-gray-500"> </label>
+          <textarea
+            rows="3"
+            name="postBody"
+            id="postBody"
+            class="border shadow h-64 block w-full resize-none placeholder-gray-400 focus:ring-0 sm:text-sm p-2 rounded-md"
+            placeholder="Whats on your mind?"
+          ></textarea>
+          <span id="postBodyError" class="hidden text-sm text-red-500">
+            Post Description is required
+          </span>
+        </div>
+        <button
+          class="justify-center place-self-end w-1/4 capitalize rounded-md border border-transparent bg-sky-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          type="submit"
+        >
+          publish
+        </button>
+      </form>
+      <p
+        id="general-error-message"
+        class="text-3xl text-red-500 capitalize"
+      ></p>
+      <h2 class="text-xl my-12 w-full">Newsfeed</h2>
+      <ul>
+        <li class="flex justify-center mt-5">
+          <a
+            href="#"
+            class="border shadow bg-gray-100 p-8 rounded-md w-3/4 hover:bg-white"
+          >
+            <div class="flex justify-between mb-5">
+              <h3>Sander Smedbøl</h3>
+              <p>11 h ago</p>
+            </div>
+            <h4 class="text-lg p-2 mb-2">This is a post</h4>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae
+              eveniet eaque tenetur iure praesentium eligendi ducimus modi, in
+              aliquid! At provident accusamus suscipit animi, porro explicabo
+              distinctio! Laboriosam, pariatur eius!
+            </p>
+          </a>
+        </li>
+        <li class="flex justify-center mt-5">
+          <a
+            href="#"
+            class="border shadow bg-gray-100 p-8 rounded-md w-3/4 hover:bg-white"
+          >
+            <div class="flex justify-between mb-5">
+              <h3>Sander Smedbøl</h3>
+              <p>11 h ago</p>
+            </div>
+            <h4 class="text-lg p-2 mb-2">This is a post</h4>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae
+              eveniet eaque tenetur iure praesentium eligendi ducimus modi, in
+              aliquid! At provident accusamus suscipit animi, porro explicabo
+              distinctio! Laboriosam, pariatur eius!
+            </p>
+          </a>
+        </li>
+        <li class="flex justify-center mt-5">
+          <a
+            href="#"
+            class="border shadow bg-gray-100 p-8 rounded-md w-3/4 hover:bg-white"
+          >
+            <div class="flex justify-between mb-5">
+              <h3>Sander Smedbøl</h3>
+              <p>11 h ago</p>
+            </div>
+            <h4 class="text-lg p-2 mb-2">This is a post</h4>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae
+              eveniet eaque tenetur iure praesentium eligendi ducimus modi, in
+              aliquid! At provident accusamus suscipit animi, porro explicabo
+              distinctio! Laboriosam, pariatur eius!
+            </p>
+          </a>
+        </li>
+      </ul>
     </main>
+    <footer class="bg-sky-900 mt-12">
+      <p class="flex justify-center text-white text-xl p-5">
+        JavaScript 2 CA for Sander Smedbøl
+      </p>
+      <div class="max-w-screen-xl flex flex-col mx-auto">
+        <a href="./index.html" class="text-white my-5 hover:underline">Home</a>
+        <a href="#" class="text-white my-5 hover:underline">Profile</a>
+        <a href="./sign-in.html" class="text-white my-5 hover:underline"
+          >Log out</a
+        >
+      </div>
+    </footer>
   </body>
 </html>
