@@ -30,7 +30,9 @@ function createHeader() {
       >
     </div>
     <div class="py-6 pl-6 ml-20">
-      <a href="#" class="${pathname === "#" ? "hover:underline" : ""}"
+      <a href="./profile.html" class="${
+        pathname === "./profile.html" ? "hover:underline" : ""
+      }"
         >Profile</a
       >
     </div>`;

@@ -18,9 +18,9 @@
       referrerpolicy="no-referrer"
     />
     <script type="module" src="./js/main.js" defer></script>
-    <script type="module" src="./js/getPosts.js" defer></script>
+    <script type="module" src="./js/userPosts.js" defer></script>
     <script type="module" src="./js/createPost.js" defer></script>
-    <title>HOME || JS-2-CA</title>
+    <title>PROFILE || JS-2-CA</title>
   </head>
   <body class="bg-gray-200 min-h-screen">
     <header class="bg-sky-900">
@@ -30,10 +30,22 @@
       ></div>
     </header>
     <main class="mx-auto max-w-screen-xl">
-      <h1 class="text-2xl my-12">Home</h1>
+      <h1 class="text-2xl my-12">Profile</h1>
+      <div id="userInfo" class="flex justify-between w-1/2 mx-auto my-24">
+        <!-- <div class="fa fa-user fa-6x text-gray-600"></div>
+        <div class="w-1/2">
+          <div class="flex justify-between text-xl font-bold">
+            <p class="mx-auto">sander_smedbol</p>
+          </div>
+          <div class="flex justify-between mt-10 text-xl">
+            <p>Email:</p>
+            <p>sansme55951@stud.noroff.no</p>
+          </div>
+        </div> -->
+      </div>
       <form
         id="create-post-form"
-        class="flex flex-col gap-y-2 p-4 mx-auto w-1/2 text-left bg-gray-100 rounded-md border shadow"
+        class="flex flex-col gap-y-2 p-4 mx-auto w-1/2 text-left bg-gray-100 rounded-md border shadow mt-32"
       >
         <div class="flex flex-col mb-2">
           <label for="postTitle" class="text-gray-500 text-lg mb-6"
@@ -70,21 +82,10 @@
           publish
         </button>
       </form>
-      <p
-        id="createPostFailedMessage"
-        class="text-2xl text-red-500 text-center mt-12"
-      ></p>
-      <p
-        id="general-error-message"
-        class="text-3xl text-red-500 capitalize"
-      ></p>
-      <h2 class="text-xl my-12">Newsfeed</h2>
-      <ul id="posts-container">
+      <h2 class="text-xl my-12">My posts</h2>
+      <ul id="myPosts-container">
         <!-- <li class="flex justify-center mt-5">
-          <a
-            href="#"
-            class="border shadow bg-gray-100 p-8 rounded-md w-3/4 hover:bg-white"
-          >
+          <div class="border shadow bg-gray-100 p-8 rounded-md w-3/4">
             <div class="flex justify-between mb-5">
               <h3>Sander Smedbøl</h3>
               <p>11 h ago</p>
@@ -96,50 +97,16 @@
               aliquid! At provident accusamus suscipit animi, porro explicabo
               distinctio! Laboriosam, pariatur eius!
             </p>
-          </a>
-        </li>
-        <li class="flex justify-center mt-5">
-          <a
-            href="#"
-            class="border shadow bg-gray-100 p-8 rounded-md w-3/4 hover:bg-white"
-          >
-            <div class="flex justify-between mb-5">
-              <h3>Sander Smedbøl</h3>
-              <p>11 h ago</p>
+            <div class="flex justify-between mt-6">
+              <div class="fa fa-edit fa-2x mr-6 text-gray-500"></div>
+              <div class="fa fa-trash fa-2x text-gray-500"></div>
             </div>
-            <h4 class="text-lg p-2 mb-2">This is a post</h4>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              eveniet eaque tenetur iure praesentium eligendi ducimus modi, in
-              aliquid! At provident accusamus suscipit animi, porro explicabo
-              distinctio! Laboriosam, pariatur eius!
-            </p>
-          </a>
-        </li>
-        <li class="flex justify-center mt-5">
-          <a
-            href="#"
-            class="border shadow bg-gray-100 p-8 rounded-md w-3/4 hover:bg-white"
-          >
-            <div class="flex justify-between mb-5">
-              <h3>Sander Smedbøl</h3>
-              <p>11 h ago</p>
-            </div>
-            <h4 class="text-lg p-2 mb-2">This is a post</h4>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              eveniet eaque tenetur iure praesentium eligendi ducimus modi, in
-              aliquid! At provident accusamus suscipit animi, porro explicabo
-              distinctio! Laboriosam, pariatur eius!
-            </p>
-          </a>
+          </div>
         </li> -->
-        <li id="noPostsToDisplayMessage" class="text-3xl text-center hidden">
-          There are currently no posts to display
-        </li>
+        <li id="noPostsToDisplayMessage" class="text-3xl text-center"></li>
         <li
-          id="getPostsErrorMessage"
-          class="text-3xl text-red-500 text-center hidden"
+          id="fetchPostErrorMessage"
+          class="text-3xl text-center text-red-500"
         ></li>
       </ul>
     </main>

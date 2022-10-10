@@ -7,6 +7,7 @@ export default {
         home: resolve(__dirname, "index.html"),
         signIn: resolve(__dirname, "sign-in.html"),
         signUp: resolve(__dirname, "sign-up.html"),
+        singlePost: resolve(__dirname, "single-post.html"),
       },
     },
   },
