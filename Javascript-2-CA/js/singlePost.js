@@ -17,12 +17,27 @@ async function getPostByID() {
     },
   });
   const data = await response.json();
+  console.log(data);
   const postTitle = data.title;
   const postBody = data.body;
+  const postMedia = data.media;
   const timeUpdated = new Date(data.updated);
-  const postUpdated = timeUpdated.toLocaleDateString();
+  const postUpdated = timeUpdated.toLocaleTimeString([], {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   const timeCreated = new Date(data.created);
-  const postCreated = timeCreated.toLocaleDateString();
+  const postCreated = timeCreated.toLocaleTimeString([], {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
   const ID = data.id;
   singlePostDetails.innerHTML = `<li class="flex justify-center mt-5">
   <div class="border shadow bg-gray-100 p-8 rounded-md w-3/4">
@@ -31,7 +46,8 @@ async function getPostByID() {
       <p>Post-ID: ${ID}</p>
     </div>
     <h4 class="text-xl p-2 mb-2 text-center">${postTitle}</h4>
-    <p class="border-b border-gray-500 pb-4">
+    <img src="${postMedia}" class="w-1/2 mx-auto"/>
+    <p class="pb-4 w-1/2 mx-auto mt-6">
       ${postBody}
     </p>
     <div class="flex justify-between w-1/3 mx-auto mt-6">

@@ -10,6 +10,7 @@ const userName = getUserName();
 const USER_POSTS_API_URL =
   BASE_API_URL + `api/v1/social/profiles/${userName}?_posts=true`;
 const DELETE_POST_API_URL = BASE_API_URL + `api/v1/social/posts`;
+const EDIT_POST_API_URL = BASE_API_URL + `api/v1/social/posts`;
 
 export {
   BASE_API_URL,
@@ -20,4 +21,5 @@ export {
   SINGLE_POST_API_URL,
   USER_POSTS_API_URL,
   DELETE_POST_API_URL,
+  EDIT_POST_API_URL,
 };

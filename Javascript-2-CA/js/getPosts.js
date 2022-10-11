@@ -31,6 +31,7 @@ if (!accessToken) {
         .map((post) => {
           const postTitle = post.title;
           const postBody = post.body;
+          const postMedia = post.media;
           const created = post.created;
           const ID = post.id;
           const hoursSinceCreated = now.diff(created, "hours");
@@ -44,8 +45,9 @@ if (!accessToken) {
               <h3>Sander Smedbøl</h3>
               <p>${hoursSinceCreated} h ago</p>
             </div>
-            <h4 class="text-lg p-2 mb-2 w-2/3 mx-auto" >${postTitle}</h4>
-            <p class="w-2/3 mx-auto">
+            <h4 class="text-lg p-2 mb-2 text-center" >${postTitle}</h4>
+            <img src="${postMedia}" class="w-1/2 mx-auto"/>
+            <p class="pb-4 w-1/2 mx-auto mt-6">
               ${postBody}
             </p>
           </a>
