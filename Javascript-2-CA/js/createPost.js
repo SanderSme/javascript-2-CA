@@ -9,6 +9,8 @@ const postTitleErrorMessage = document.querySelector("#postTitleError");
 const postBody = document.querySelector("#postBody");
 const postBodyErrorMessage = document.querySelector("#postBodyError");
 
+const postMedia = document.querySelector("#img");
+
 const createPostFailedMessage = document.querySelector(
   "#createPostFailedMessage"
 );
@@ -34,6 +36,7 @@ createPost.addEventListener("submit", function (event) {
     const postData = {
       title: postTitle.value,
       body: postBody.value,
+      media: postMedia.value,
     };
     console.log(postData);
     const accessToken = getToken();
@@ -50,7 +53,7 @@ createPost.addEventListener("submit", function (event) {
         document.location.reload();
       } else {
         const error = await response.json();
-        const errorMessage = `Error: ${error}`;
+        const errorMessage = `Error: ${error.error}`;
         throw new Error(errorMessage);
       }
     })().catch((errorMessage) => {
