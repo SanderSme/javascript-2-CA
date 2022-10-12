@@ -38,7 +38,11 @@ createPost.addEventListener("submit", function (event) {
       body: postBody.value,
       media: postMedia.value,
     };
-    console.log(postData);
+    const dataWithoutMedia = {
+      title: postTitle.value,
+      body: postBody.value,
+    };
+    console.log(dataWithoutMedia);
     const accessToken = getToken();
     (async function createPost() {
       const response = await fetch(CREATE_POST_API_URL, {

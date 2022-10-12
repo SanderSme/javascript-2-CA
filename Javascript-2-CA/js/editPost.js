@@ -7,6 +7,8 @@ const postTitleErrorMessage = document.querySelector("#postTitleError");
 const postBody = document.querySelector("#postBody");
 const postBodyErrorMessage = document.querySelector("#postBodyError");
 const editFormErrorMessage = document.querySelector("#editFormErrorMessage");
+const postMedia = document.querySelector("#img");
+
 const accessToken = getToken();
 
 const params = window.location.search;
@@ -29,8 +31,10 @@ async function getPostByID() {
     const data = await response.json();
     const title = data.title;
     const body = data.body;
+    const media = data.media;
     postTitle.value = title;
     postBody.value = body;
+    postMedia.value = media;
   } else {
     const error = await response.json();
     throw Error(error);
@@ -62,6 +66,7 @@ editPostForm.addEventListener("submit", function (event) {
     const postData = {
       title: postTitle.value,
       body: postBody.value,
+      media: postMedia.value,
     };
     (async function editPost() {
       const response = await fetch(`${EDIT_POST_API_URL}/${postID}`, {
