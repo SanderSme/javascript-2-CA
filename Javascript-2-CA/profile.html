@@ -63,6 +63,17 @@
             Post Description is required
           </span>
         </div>
+        <div class="flex flex-col gap-2">
+          <label for="img">Picture: (optional)</label>
+          <input
+            id="img"
+            name="img"
+            type="url"
+            accept="image/png, image/jpeg"
+            placeholder="Paste url here"
+            class="p-1"
+          />
+        </div>
         <button
           class="justify-center place-self-end w-1/4 capitalize rounded-md border border-transparent bg-sky-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           type="submit"
@@ -72,25 +83,6 @@
       </form>
       <h2 class="text-xl my-12">My posts</h2>
       <ul id="myPosts-container">
-        <!-- <li class="flex justify-center mt-5">
-          <div class="border shadow bg-gray-100 p-8 rounded-md w-3/4">
-            <div class="flex justify-between mb-5">
-              <h3>Sander Smedbøl</h3>
-              <p>11 h ago</p>
-            </div>
-            <h4 class="text-lg p-2 mb-2">This is a post</h4>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              eveniet eaque tenetur iure praesentium eligendi ducimus modi, in
-              aliquid! At provident accusamus suscipit animi, porro explicabo
-              distinctio! Laboriosam, pariatur eius!
-            </p>
-            <div class="flex justify-between mt-6">
-              <div class="fa fa-edit fa-2x mr-6 text-gray-500"></div>
-              <div class="fa fa-trash fa-2x text-gray-500"></div>
-            </div>
-          </div>
-        </li> -->
         <li id="noPostsToDisplayMessage" class="text-3xl text-center"></li>
         <li
           id="fetchPostErrorMessage"
