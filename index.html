@@ -16,9 +16,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script type="module" src="./js/main.js" defer></script>
-    <script type="module" src="./js/editPost.js" defer></script>
-    <title>EDIT || JS-2-CA</title>
+    <script type="module" src="js/main.js" defer></script>
+    <script type="module" src="js/getPosts.js" defer></script>
+    <script type="module" src="js/createPost.js" defer></script>
+    <title>HOME || JS-2-CA</title>
   </head>
   <body class="bg-gray-200 min-h-screen">
     <header class="bg-sky-900">
@@ -28,14 +29,14 @@
       ></div>
     </header>
     <main class="mx-auto max-w-screen-xl">
-      <h1 class="text-2xl my-12">Edit post</h1>
+      <h1 class="text-2xl my-12">Home</h1>
       <form
-        id="edit-post-form"
+        id="create-post-form"
         class="flex flex-col gap-y-2 p-4 mx-auto w-1/2 text-left bg-gray-100 rounded-md border shadow"
       >
         <div class="flex flex-col mb-2">
           <label for="postTitle" class="text-gray-500 text-lg mb-6"
-            >Edit:
+            >Create post:
           </label>
           <input
             id="postTitle"
@@ -76,13 +77,27 @@
           class="justify-center place-self-end w-1/4 capitalize rounded-md border border-transparent bg-sky-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           type="submit"
         >
-          update
+          publish
         </button>
-        <div
-          id="editFormErrorMessage"
-          class="text-red-500 text-xl mx-auto"
-        ></div>
       </form>
+      <p
+        id="createPostFailedMessage"
+        class="text-2xl text-red-500 text-center mt-12"
+      ></p>
+      <p
+        id="general-error-message"
+        class="text-3xl text-red-500 capitalize"
+      ></p>
+      <h2 class="text-xl my-12">Newsfeed</h2>
+      <ul id="posts-container" class="flex">
+        <li id="noPostsToDisplayMessage" class="text-3xl text-center hidden">
+          There are currently no posts to display
+        </li>
+        <li
+          id="getPostsErrorMessage"
+          class="text-3xl text-red-500 text-center hidden"
+        ></li>
+      </ul>
     </main>
     <footer class="bg-sky-900 mt-12">
       <p class="flex justify-center text-white text-xl p-5">
@@ -91,7 +106,7 @@
       <div class="max-w-screen-xl flex flex-col mx-auto">
         <a href="./index.html" class="text-white my-5 hover:underline">Home</a>
         <a href="#" class="text-white my-5 hover:underline">Profile</a>
-        <a href="./sign-in.html" class="text-white my-5 hover:underline"
+        <a href="sign-in.html" class="text-white my-5 hover:underline"
           >Log out</a
         >
       </div>
