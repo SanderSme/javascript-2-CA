@@ -26,6 +26,7 @@ async function getUserPosts() {
 
   if (response.ok) {
     const data = await response.json();
+    console.log(data);
     let now = moment(new Date());
     userInfo.innerHTML = `<div class="fa fa-user fa-6x text-gray-600"></div>
     <div class="w-1/2">
@@ -53,12 +54,15 @@ async function getUserPosts() {
           return `<li class="flex justify-center mt-5">
         <div class="border shadow bg-gray-100 p-8 rounded-md w-3/4">
           <div class="flex justify-between mb-5">
-            <h3>${postOwner}</h3>
-            <p>${hoursSinceCreated} h ago</p>
+          <div>
+          <h3>${postOwner}</h3>
+          <p>${hoursSinceCreated} h ago</p>
+        </div>
+        <a href="/single-post.html?post_id=${postID}" class="hover:underline">View post details-></a>
           </div>
-          <h4 class="text-lg p-2 mb-2 w-1/2 text-center mx-auto">${postTitle}</h4>
+          <h4 class="text-xl p-2 mb-2 w-1/2 text-center mx-auto">${postTitle}</h4>
           <img src="${postMedia}" class="w-1/2 mx-auto"/>
-          <p class="w-1/2 mx-auto">
+          <p class="w-1/2 mx-auto mt-6">
             ${postBody}
           </p>
           <div class="flex justify-between mt-6">

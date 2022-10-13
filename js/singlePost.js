@@ -1,5 +1,5 @@
 import { getToken } from "./utils/storage";
-import { SINGLE_POST_API_URL } from "./settings/api";
+import { SINGLE_POST_API_URL, REACT_API_URL } from "./settings/api";
 
 const params = window.location.search;
 const searchParams = new URLSearchParams(params);
@@ -25,7 +25,8 @@ async function getPostByID() {
   const postBody = data.body;
   const postMedia = data.media;
   const postAuthor = data.author.name;
-  const postReactions = data.reactions.length;
+  const postReactions = data._count.reactions;
+  const commentsCount = data._count.comments;
   const timeUpdated = new Date(data.updated);
   const postUpdated = timeUpdated.toLocaleTimeString([], {
     year: "numeric",
@@ -66,13 +67,46 @@ async function getPostByID() {
     </div>
     <div class="flex justify-between mt-6">
       <div class="flex">
-        <button type="button" id="like-btn" class="fa fa-thumbs-up fa-2x p-2"></button>
+        <button type="button" data-id="${ID}" id="like-btn" class="like-btn fa fa-thumbs-up fa-2x p-2"></button>
         <div>${postReactions}</div>      
         </div>
-      <div class="fa fa-comment fa-2x p-2"></div>
+        <div class="flex">
+        <div class="fa fa-comment fa-2x p-2"></div>
+        <div>${commentsCount}</div>
+      </div>
     </div>
   </div>
 </li>`;
 }
 
-getPostByID();
+getPostByID().then(() => {
+  reactToPost();
+});
+
+function reactToPost() {
+  let reactToPostBtns = document.getElementsByClassName("like-btn");
+  let numberOfReactBtns = reactToPostBtns.length;
+  for (let i = 0; i < numberOfReactBtns; i++) {
+    reactToPostBtns[i].addEventListener("click", function () {
+      const postID = this.dataset.id;
+      console.log(postID);
+      reactToPostBtns[i].classList.add("text-sky-600");
+      reactoToPostByID(postID);
+    });
+  }
+}
+
+async function reactoToPostByID(id) {
+  const response = await fetch(`${REACT_API_URL}/${id}/react/👍`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  console.log(response);
+  if (response.ok) {
+    location.reload();
+  } else {
+    console.log("not liked");
+  }
+}
