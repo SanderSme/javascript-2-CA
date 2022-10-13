@@ -12,7 +12,7 @@ const searchBar = document.querySelector("#searchBar");
 let data = [];
 
 searchBar.addEventListener("keyup", (e) => {
-  const searchString = e.target.value;
+  const searchString = e.target.value.toLowerCase();
   const filteredPosts = data.filter((post) => {
     return post.title.toLowerCase().includes(searchString);
   });
@@ -37,6 +37,7 @@ async function getPosts() {
   );
   if (response.ok) {
     data = await response.json();
+    console.log(data);
     displayPosts(data);
   } else {
     const error = await response.json();
