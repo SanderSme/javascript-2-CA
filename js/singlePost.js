@@ -45,11 +45,18 @@ async function getPostByID() {
     minute: "2-digit",
   });
   const ID = data.id;
+  let postAvatar = `<img src="./img/user-alt.svg" alt="" class="w-10"/>`;
+  if (data.author.avatar) {
+    postAvatar = `<img src="${data.author.avatar}" alt="" class="w-16"/>`;
+  }
   singlePostDetails.innerHTML = `
   <li class="flex justify-center mt-5">
     <div class="border shadow bg-gray-100 p-8 rounded-md w-3/4">
       <div class="flex justify-between mb-5">
-        <h3>${postAuthor}</h3>
+      <div class="flex items-end mb-2">
+      ${postAvatar}
+        <h3 class="ml-2 font-semibold">${postAuthor}</h3>
+      </div>
         <p>Post-ID: ${ID}</p>
       </div>
       <h4 class="text-xl p-2 mb-2 text-center">${postTitle}</h4>
@@ -105,7 +112,9 @@ async function reactoToPostByID(id) {
   });
   console.log(response);
   if (response.ok) {
-    location.reload();
+    getPostByID().then(() => {
+      reactToPost();
+    });
   } else {
     console.log("not liked");
   }

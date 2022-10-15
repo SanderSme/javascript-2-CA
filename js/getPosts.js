@@ -67,6 +67,7 @@ async function getPosts() {
   if (response.ok) {
     data = await response.json();
     displayPosts(data);
+    console.log(data);
   } else {
     const error = await response.json();
     const errorMessage = `Error: ${error}`;
@@ -102,6 +103,10 @@ const displayPosts = (data) => {
             time = "d ago";
           }
         }
+        let avatar = `<img src="./img/user-alt.svg" alt="" class="w-10"/>`;
+        if (post.author.avatar) {
+          avatar = `<img src="${post.author.avatar}" alt="" class="w-16"/>`;
+        }
         return `
         <li class="flex justify-center mt-5">
           <div
@@ -110,7 +115,10 @@ const displayPosts = (data) => {
           >
             <div class="flex justify-between mb-5">
               <div>
-                <h3>${author}</h3>
+                <div class="flex items-end mb-2">
+                ${avatar}
+                  <h3 class="ml-2 font-semibold">${author}</h3>
+                </div>
                 <p>${timeSinceCreated} ${time}</p>
               </div>
               <a href="/single-post.html?post_id=${ID}" class="hover:underline">View post details-></a>

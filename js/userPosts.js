@@ -28,7 +28,12 @@ async function getUserPosts() {
     const data = await response.json();
     console.log(data);
     let now = moment(new Date());
-    userInfo.innerHTML = `<div class="fa fa-user fa-6x text-gray-600"></div>
+    console.log(data.avatar);
+    let userAvatar = `<img src="./img/user-alt.svg" alt="" class="w-1/5"/>`;
+    if (data.avatar) {
+      userAvatar = `<img src="${data.avatar}" alt="" class="w-1/5"/>`;
+    }
+    userInfo.innerHTML = `${userAvatar}
     <div class="w-1/2">
       <div class="flex justify-between">
         <p class="mx-auto text-xl font-bold">${data.name}</p>
@@ -109,7 +114,6 @@ async function deletePostByID(id) {
   if (response.ok) {
     getUserPosts().then(() => {
       deletePost();
-      document.location.reload();
     });
   } else {
     const error = await response.json();
