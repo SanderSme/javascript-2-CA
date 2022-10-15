@@ -14,7 +14,10 @@ let data = [];
 searchBar.addEventListener("keyup", (e) => {
   const searchString = e.target.value.toLowerCase();
   const filteredPosts = data.filter((post) => {
-    return post.title.toLowerCase().includes(searchString);
+    return (
+      post.title.toLowerCase().includes(searchString) ||
+      post.author.name.toLowerCase().includes(searchString)
+    );
   });
   displayPosts(filteredPosts);
 });
@@ -24,20 +27,45 @@ if (!accessToken) {
   location.href = "../sign-in.html";
 }
 
+const sortOld = document.querySelector("#sortOld");
+const sortNew = document.querySelector("#sortNew");
+
+let GET_POSTS_URL = `${GET_POSTS_API_URL}/?_author=true&_comments=true&_reactions=true&&?sort=created&sortOrder=desc`;
+
+sortOld.addEventListener("click", function () {
+  GET_POSTS_URL = `${GET_POSTS_API_URL}/?_author=true&_comments=true&_reactions=true&&?sort=created&sortOrder=asc`;
+  sortOld.classList.add("bg-sky-900");
+  sortOld.classList.add("text-white");
+  sortNew.classList.remove("bg-sky-900");
+  sortNew.classList.remove("text-white");
+  getPosts().then(() => {
+    displayPosts(data);
+    reactToPost();
+  });
+});
+
+sortNew.addEventListener("click", function () {
+  GET_POSTS_URL = `${GET_POSTS_API_URL}/?_author=true&_comments=true&_reactions=true&&?sort=created&sortOrder=desc`;
+  sortNew.classList.add("bg-sky-900");
+  sortNew.classList.add("text-white");
+  sortOld.classList.remove("bg-sky-900");
+  sortOld.classList.remove("text-white");
+  getPosts().then(() => {
+    displayPosts(data);
+    reactToPost();
+  });
+});
+
 async function getPosts() {
-  const response = await fetch(
-    `${GET_POSTS_API_URL}/?_author=true&_comments=true&_reactions=true&&?sort=created&sortOrder=desc`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
+  const response = await fetch(GET_POSTS_URL, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   if (response.ok) {
     data = await response.json();
-    console.log(data);
     displayPosts(data);
   } else {
     const error = await response.json();
@@ -137,11 +165,9 @@ async function reactoToPostByID(id) {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  console.log(response);
   if (response.ok) {
     getPosts().then(() => {
       reactToPost();
-      location.reload();
     });
   } else {
     console.log("not liked");
