@@ -22,10 +22,13 @@ async function getPostByID() {
   const data = await response.json();
   const postTitle = data.title;
   const postBody = data.body;
-  const postMedia = data.media;
   const postAuthor = data.author.name;
   const postReactions = data._count.reactions;
   const commentsCount = data._count.comments;
+  let postMedia = `<img src="${data.media}" class="w-1/2 mx-auto"/>`;
+  if (!data.media) {
+    postMedia = "";
+  }
   const timeUpdated = new Date(data.updated);
   const postUpdated = timeUpdated.toLocaleTimeString([], {
     year: "numeric",
@@ -59,7 +62,7 @@ async function getPostByID() {
         <p class="lg:text-lg mobile:text-md">Post-ID: ${ID}</p>
       </div>
       <h4 class="lg:text-xl mobile:text-lg p-2 mb-2 text-center">${postTitle}</h4>
-      <img src="${postMedia}" class="w-1/2 mx-auto"/>
+      ${postMedia}
       <p class="pb-4 lg:w-1/2 mobile:w-3/4 mx-auto mt-6 mobile:text-md lg:text-lg">
         ${postBody}
       </p>
