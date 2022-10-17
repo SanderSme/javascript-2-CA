@@ -45,9 +45,9 @@ async function getPostByID() {
     minute: "2-digit",
   });
   const ID = data.id;
-  let postAvatar = `<img src="./img/user-alt.svg" alt="" class="w-10"/>`;
+  let postAvatar = `<img src="./img/user-alt.svg" alt="" class="lg:w-10 mobile:w-6"/>`;
   if (data.author.avatar) {
-    postAvatar = `<img src="${data.author.avatar}" alt="" class="w-16"/>`;
+    postAvatar = `<img src="${data.author.avatar}" alt="" class="lg:w-16 mobile:w-10"/>`;
   }
   singlePostDetails.innerHTML = `
   <li class="flex justify-center mt-5">
@@ -55,20 +55,20 @@ async function getPostByID() {
       <div class="flex justify-between mb-5">
       <div class="flex items-end mb-2">
       ${postAvatar}
-        <h3 class="ml-2 font-semibold">${postAuthor}</h3>
+        <h3 class="ml-2 font-semibold mobile:text-sm lg:text-lg">${postAuthor}</h3>
       </div>
-        <p>Post-ID: ${ID}</p>
+        <p class="lg:text-lg mobile:text-md">Post-ID: ${ID}</p>
       </div>
-      <h4 class="text-xl p-2 mb-2 text-center">${postTitle}</h4>
+      <h4 class="lg:text-xl mobile:text-lg p-2 mb-2 text-center">${postTitle}</h4>
       <img src="${postMedia}" class="w-1/2 mx-auto"/>
-      <p class="pb-4 w-1/2 mx-auto mt-6">
+      <p class="pb-4 lg:w-1/2 mobile:w-3/4 mx-auto mt-6 mobile:text-md lg:text-lg">
         ${postBody}
       </p>
-      <div class="flex justify-between w-1/3 mx-auto mt-6">
+      <div class="flex justify-between lg:text-md xl:text-lg mobile:text-sm lg:w-1/3 mobile:w-3/4 mx-auto mt-6">
         <p>Created:</p>
         <p>${postCreated}</p>
       </div>
-    <div class="flex justify-between w-1/3 mx-auto mt-6">
+    <div class="flex justify-between lg:text-md xl:text-lg md:text-md mobile:text-sm lg:w-1/3 mobile:w-3/4 mx-auto mt-6">
       <p>Updated:</p>
       <p>${postUpdated}</p>
     </div>

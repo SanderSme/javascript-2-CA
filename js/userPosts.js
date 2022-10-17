@@ -29,16 +29,16 @@ async function getUserPosts() {
     console.log(data);
     let now = moment(new Date());
     console.log(data.avatar);
-    let userAvatar = `<img src="./img/user-alt.svg" alt="" class="w-1/5"/>`;
+    let userAvatar = `<img src="./img/user-alt.svg" alt="" class="md:w-1/5 mobile:w-1/3"/>`;
     if (data.avatar) {
-      userAvatar = `<img src="${data.avatar}" alt="" class="w-1/5"/>`;
+      userAvatar = `<img src="${data.avatar}" alt="" class="md:w-1/5 mobile:w-1/3"/>`;
     }
     userInfo.innerHTML = `${userAvatar}
     <div class="w-1/2">
       <div class="flex justify-between">
-        <p class="mx-auto text-xl font-bold">${data.name}</p>
+        <p class="mx-auto xl:text-xl mobile:text-lg font-bold">${data.name}</p>
       </div>
-      <div class="flex justify-between mt-10 text-xl">
+      <div class="flex justify-between mt-10 xl:text-xl mobile:text-lg">
         <p>Email:</p>
         <p>${data.email}</p>
       </div>
@@ -60,14 +60,17 @@ async function getUserPosts() {
         <div class="border shadow bg-gray-100 p-8 rounded-md w-3/4">
           <div class="flex justify-between mb-5">
           <div>
-          <h3>${postOwner}</h3>
+          <div class="flex items-end mb-2">
+                ${userAvatar}
+                  <h3 class="mobile:text-sm lg:text-lg ml-2 font-semibold">${postOwner}</h3>
+                </div>
           <p>${hoursSinceCreated} h ago</p>
         </div>
-        <a href="/single-post.html?post_id=${postID}" class="hover:underline">View post details-></a>
+        <a href="/single-post.html?post_id=${postID}" class="hover:underline lg:text-lg mobile:text-md">View post details-></a>
           </div>
-          <h4 class="text-xl p-2 mb-2 w-1/2 text-center mx-auto">${postTitle}</h4>
+          <h4 class="lg:text-xl mobile:text-lg p-2 mb-2 w-1/2 text-center mx-auto">${postTitle}</h4>
           <img src="${postMedia}" class="w-1/2 mx-auto"/>
-          <p class="w-1/2 mx-auto mt-6">
+          <p class="lg:w-1/2 mobile:w-3/4 mx-auto mt-6 mobile:text-md lg:text-lg">
             ${postBody}
           </p>
           <div class="flex justify-between mt-6">
@@ -114,6 +117,7 @@ async function deletePostByID(id) {
   if (response.ok) {
     getUserPosts().then(() => {
       deletePost();
+      location.reload();
     });
   } else {
     const error = await response.json();

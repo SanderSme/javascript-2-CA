@@ -33,16 +33,17 @@ createPost.addEventListener("submit", function (event) {
   }
   let formIsValid = isPostTitle && isPostBody;
   if (formIsValid) {
-    const postData = {
+    let postData = {
       title: postTitle.value,
       body: postBody.value,
       media: postMedia.value,
     };
-    const dataWithoutMedia = {
-      title: postTitle.value,
-      body: postBody.value,
-    };
-    console.log(dataWithoutMedia);
+    if (!postMedia.value) {
+      postData = {
+        title: postTitle.value,
+        body: postBody.value,
+      };
+    }
     const accessToken = getToken();
     (async function createPost() {
       const response = await fetch(CREATE_POST_API_URL, {

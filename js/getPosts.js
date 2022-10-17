@@ -93,6 +93,19 @@ const displayPosts = (data) => {
         const author = post.author.name;
         const reactions = post.reactions.length;
         const commentsCount = post._count.comments;
+        let postComments = post.comments;
+        function displayComments() {
+          let listOfComments = ``;
+          for (let i = 0; i < postComments.length; i++) {
+            if (postComments[i].body) {
+              listOfComments += `<li class="flex justify-between w-3/4 mx-auto border-b border-gray-300 py-2">
+              <p class="font-semibold">${postComments[i].owner}:</p>
+              <p>${postComments[i].body}</p>
+            </li>`;
+            }
+          }
+          return listOfComments;
+        }
         let time = "m ago";
         let timeSinceCreated = now.diff(created, "minutes");
         if (timeSinceCreated > 59) {
@@ -103,9 +116,9 @@ const displayPosts = (data) => {
             time = "d ago";
           }
         }
-        let avatar = `<img src="./img/user-alt.svg" alt="" class="w-10"/>`;
+        let avatar = `<img src="./img/user-alt.svg" alt="" class="lg:w-10 mobile:w-6"/>`;
         if (post.author.avatar) {
-          avatar = `<img src="${post.author.avatar}" alt="" class="w-16"/>`;
+          avatar = `<img src="${post.author.avatar}" alt="" class="lg:w-16 mobile:w-10"/>`;
         }
         return `
         <li class="flex justify-center mt-5">
@@ -117,16 +130,16 @@ const displayPosts = (data) => {
               <div>
                 <div class="flex items-end mb-2">
                 ${avatar}
-                  <h3 class="ml-2 font-semibold">${author}</h3>
+                  <h3 class="mobile:text-sm lg:text-lg ml-2 font-semibold">${author}</h3>
                 </div>
                 <p>${timeSinceCreated} ${time}</p>
               </div>
-              <a href="/single-post.html?post_id=${ID}" class="hover:underline">View post details-></a>
+              <a href="/single-post.html?post_id=${ID}" class="hover:underline lg:text-lg mobile:text-md">View post details-></a>
             </div>
             
-            <h4 class="text-xl p-2 mb-2 text-center" >${postTitle}</h4>
+            <h4 class="lg:text-xl mobile:text-lg p-2 mb-2 text-center" >${postTitle}</h4>
             <img src="${postMedia}" class="w-1/2 mx-auto"/>
-            <p class="pb-4 w-1/2 mx-auto mt-6">
+            <p class="pb-4 lg:w-1/2 mobile:w-3/4 mx-auto mt-6 mobile:text-md lg:text-lg">
               ${postBody}
             </p>
             <div class="flex justify-between mt-6">
@@ -139,7 +152,12 @@ const displayPosts = (data) => {
                 <div>${commentsCount}</div>
               </div>
             </div>
-            
+            <div id="commentSection" class="border-t border-gray-500 mt-6 hidden">
+              <p>Comments: </p>
+              <ul id="comments" class="hidden">
+              ${displayComments()}
+              </ul>
+            </div>
           </div>
         </li>
         `;
@@ -152,6 +170,7 @@ const displayPosts = (data) => {
 getPosts().then(() => {
   displayPosts(data);
   reactToPost();
+  showComments();
 });
 
 function reactToPost() {
@@ -177,7 +196,18 @@ async function reactoToPostByID(id) {
     getPosts().then(() => {
       reactToPost();
     });
-  } else {
-    console.log("not liked");
+  }
+}
+
+function showComments() {
+  const commentSection = document.querySelector("#commentSection");
+  let showCommentsBtns = document.getElementsByClassName("comment-btn");
+  let numberOfCommentBtns = showCommentsBtns.length;
+  for (let i = 0; i < numberOfCommentBtns; i++) {
+    showCommentsBtns[i].addEventListener("click", function () {
+      const postID = this.dataset.id;
+      console.log(postID);
+      commentSection.classList.toggle("hidden");
+    });
   }
 }

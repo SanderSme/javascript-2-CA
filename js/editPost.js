@@ -63,11 +63,17 @@ editPostForm.addEventListener("submit", function (event) {
   }
   let validForm = isPostTitle && isPostTitle;
   if (validForm) {
-    const postData = {
+    let postData = {
       title: postTitle.value,
       body: postBody.value,
       media: postMedia.value,
     };
+    if (!postMedia.value) {
+      postData = {
+        title: postTitle.value,
+        body: postBody.value,
+      };
+    }
     (async function editPost() {
       const response = await fetch(`${EDIT_POST_API_URL}/${postID}`, {
         method: "PUT",
