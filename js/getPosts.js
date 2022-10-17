@@ -67,7 +67,6 @@ async function getPosts() {
   if (response.ok) {
     data = await response.json();
     displayPosts(data);
-    console.log(data);
   } else {
     const error = await response.json();
     const errorMessage = `Error: ${error}`;
@@ -87,7 +86,10 @@ const displayPosts = (data) => {
       .map((post) => {
         const postTitle = post.title;
         const postBody = post.body;
-        const postMedia = post.media;
+        let postMedia = `<img src="${post.media}" class="w-1/2 mx-auto"/>`;
+        if (!post.media) {
+          postMedia = "";
+        }
         const created = post.created;
         const ID = post.id;
         const author = post.author.name;
@@ -98,7 +100,7 @@ const displayPosts = (data) => {
           let listOfComments = ``;
           for (let i = 0; i < postComments.length; i++) {
             if (postComments[i].body) {
-              listOfComments += `<li class="flex justify-between w-3/4 mx-auto border-b border-gray-300 py-2">
+              listOfComments += `<li class="flex justify-between w-3/4 mx-auto border-b border-gray-300 p-2">
               <p class="font-semibold">${postComments[i].owner}:</p>
               <p>${postComments[i].body}</p>
             </li>`;
@@ -138,7 +140,7 @@ const displayPosts = (data) => {
             </div>
             
             <h4 class="lg:text-xl mobile:text-lg p-2 mb-2 text-center" >${postTitle}</h4>
-            <img src="${postMedia}" class="w-1/2 mx-auto"/>
+            ${postMedia}
             <p class="pb-4 lg:w-1/2 mobile:w-3/4 mx-auto mt-6 mobile:text-md lg:text-lg">
               ${postBody}
             </p>
@@ -152,9 +154,8 @@ const displayPosts = (data) => {
                 <div>${commentsCount}</div>
               </div>
             </div>
-            <div id="commentSection" class="border-t border-gray-500 mt-6 hidden">
-              <p>Comments: </p>
-              <ul id="comments" class="hidden">
+            <div id="commentSection" class="border-t border-gray-300 mt-6">
+              <ul id="comments">
               ${displayComments()}
               </ul>
             </div>
@@ -170,7 +171,6 @@ const displayPosts = (data) => {
 getPosts().then(() => {
   displayPosts(data);
   reactToPost();
-  showComments();
 });
 
 function reactToPost() {
@@ -195,19 +195,6 @@ async function reactoToPostByID(id) {
   if (response.ok) {
     getPosts().then(() => {
       reactToPost();
-    });
-  }
-}
-
-function showComments() {
-  const commentSection = document.querySelector("#commentSection");
-  let showCommentsBtns = document.getElementsByClassName("comment-btn");
-  let numberOfCommentBtns = showCommentsBtns.length;
-  for (let i = 0; i < numberOfCommentBtns; i++) {
-    showCommentsBtns[i].addEventListener("click", function () {
-      const postID = this.dataset.id;
-      console.log(postID);
-      commentSection.classList.toggle("hidden");
     });
   }
 }

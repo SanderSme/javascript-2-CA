@@ -34,8 +34,27 @@
       <h1 class="lg:text-2xl mobile:text-xl my-12">Profile</h1>
       <div
         id="userInfo"
-        class="flex justify-between w-1/2 mx-auto my-24 items-center"
+        class="flex mobile:flex-col lg:flex-row justify-between w-1/2 mx-auto mt-24 lg:items-center mobile:text-center"
       ></div>
+      <form id="changeAvatarForm" class="w-1/2 mx-auto mt-2 hidden">
+        <div class="flex flex-col">
+          <input
+            id="avatar"
+            name="avatar"
+            type="url"
+            accept="image/png, image/jpeg"
+            placeholder="Paste url here"
+            class="p-1 w-full rounded-md shadow"
+          />
+          <span id="postAvatarError" class="text-sm text-red-500"> </span>
+          <button
+            class="justify-center mx-auto w-1/4 mt-2 capitalize rounded-md border border-transparent bg-sky-900 px-2 py-1 md:text-sm mobile:text-xs font-medium text-white shadow-sm hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            type="submit"
+          >
+            Change Avatar
+          </button>
+        </div>
+      </form>
       <form
         id="create-post-form"
         class="flex flex-col gap-y-2 p-4 mx-auto lg:w-1/2 mobile:w-3/4 text-left bg-gray-100 rounded-md border shadow mt-32"

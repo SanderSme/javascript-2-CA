@@ -12,6 +12,8 @@ const USER_POSTS_API_URL =
 const DELETE_POST_API_URL = BASE_API_URL + `api/v1/social/posts`;
 const EDIT_POST_API_URL = BASE_API_URL + `api/v1/social/posts`;
 const REACT_API_URL = BASE_API_URL + `api/v1/social/posts`;
+const CHANGE_AVATAR_URL =
+  BASE_API_URL + `api/v1/social/profiles/${userName}/media`;
 
 export {
   BASE_API_URL,
@@ -24,4 +26,5 @@ export {
   DELETE_POST_API_URL,
   EDIT_POST_API_URL,
   REACT_API_URL,
+  CHANGE_AVATAR_URL,
 };
