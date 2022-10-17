@@ -20,7 +20,6 @@ async function getPostByID() {
     }
   );
   const data = await response.json();
-  console.log(data);
   const postTitle = data.title;
   const postBody = data.body;
   const postMedia = data.media;
@@ -96,7 +95,6 @@ function reactToPost() {
   for (let i = 0; i < numberOfReactBtns; i++) {
     reactToPostBtns[i].addEventListener("click", function () {
       const postID = this.dataset.id;
-      console.log(postID);
       reactToPostBtns[i].classList.add("text-sky-600");
       reactoToPostByID(postID);
     });
